@@ -43,7 +43,7 @@
 .pill-btn-outline{background:transparent;border:1px solid #333;color:#fff;padding:8px 16px;border-radius:50px;cursor:pointer;font-size:14px;display:flex;align-items:center;gap:6px}
 .send-btn{background:#F97316;border:none;color:#fff;padding:10px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;width:40px;height:40px}
 #mediafy-root-container .send-btn{background:#2563EB}
-.mediafy-footer{text-align:center;padding:4px 0;font-size:11px;color:#666}
+.mediafy-footer{text-align:center;padding:6px 0 4px 0;font-size:11px;color:#666}
 .cart-item{display:flex;align-items:center;gap:15px;background:#1e1e1e;padding:12px;border-radius:16px;margin-bottom:10px}
 .item-image{width:50px;height:50px;background:#2c2c2e;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#9da3ae}
 .cart-footer{margin-top:auto;padding-top:20px;border-top:1px solid #333}
