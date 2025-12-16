@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 .sparta-welcome-badge,.mediafy-welcome-badge{position:fixed;bottom:80px;right:105px;padding:12px 18px;background:#fff;color:#1F2937;border-radius:20px 20px 4px 20px;box-shadow:0 2px 8px rgba(0,0,0,.2);font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px;white-space:nowrap;z-index:999999;cursor:pointer;animation:bounce-in .5s ease-out}
 .sparta-welcome-badge{display:none}
 .mediafy-welcome-badge{bottom:160px}
