@@ -531,10 +531,22 @@
 const lastUserMessage = chatbox.querySelector(".chat-message.outgoing:last-of-type");
 
 if (lastUserMessage) {
-    // Odczekaj chwilę, aż DOM się przeliczy, i ustaw widok na Twoje pytanie
+    // Odczekaj chwilę, aż DOM się przeliczy
     setTimeout(() => {
-        lastUserMessage.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 100);
+        // Znajdź główny kontener z treścią
+        const container = document.querySelector(".widget-content");
+        
+        if (container) {
+            // Oblicz pozycję: Góra Twojej wiadomości minus 10px (żeby nie było przyklejone do sufitu)
+            const targetPosition = lastUserMessage.offsetTop - 10;
+            
+            // Wykonaj przewinięcie w dół do wyliczonej pozycji
+            container.scrollTo({
+                top: targetPosition,
+                behavior: "smooth"
+            });
+        }
+    }, 200);
 }
         };
         
