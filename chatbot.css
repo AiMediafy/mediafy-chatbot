@@ -1,8 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 .sparta-welcome-badge,.mediafy-welcome-badge{position:fixed;bottom:80px;right:105px;padding:12px 18px;background:#fff;color:#1F2937;border-radius:20px 20px 4px 20px;box-shadow:0 2px 8px rgba(0,0,0,.2);font-size:13px;font-weight:600;display:none;align-items:center;gap:8px;white-space:nowrap;z-index:999999;cursor:pointer;animation:bounce-in .5s ease-out}.sparta-welcome-badge{display:none}
 .mediafy-welcome-badge{bottom:160px}
-.chatbot-toggler{position:fixed;bottom:30px;right:35px;background:#F97316;border:none;display:flex;align-items:center;justify-content:center;height:60px;width:60px;border-radius:50%;box-shadow:0 4px 12px rgba(0,0,0,.3);cursor:pointer;z-index:999999;color:#fff}
-#mediafy-root-container .chatbot-toggler{bottom:110px;background:#2563EB}
+.chatbot-toggler{position:fixed;bottom:30px;right:35px;background:#F97316;border:none;display:none;align-items:center;justify-content:center;height:60px;width:60px;border-radius:50%;box-shadow:0 4px 12px rgba(0,0,0,.3);cursor:pointer;z-index:999999;color:#fff}#mediafy-root-container .chatbot-toggler{bottom:110px;background:#2563EB}
 .chatbot-toggler span{transition:all 0.3s ease-out}
 .chatbot-toggler span:last-child{display:none}
 .show-widget #sparta-root-container .chatbot-toggler span:first-child{display:none}
