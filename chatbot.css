@@ -57,12 +57,11 @@
 @keyframes bounce-in { 0% { transform: scale(.5); opacity: 0 } 70% { transform: scale(1.05); opacity: 1 } 100% { transform: scale(1) } }
 @media(max-width:450px) { .chatbot-widget { width: 100%; height: 100%; right: 0; bottom: 0; border-radius: 0 } .show-widget #sparta-root-container .chatbot-widget, .show-mediafy-widget #mediafy-root-container .chatbot-widget { height: 100dvh } .sparta-welcome-badge, .mediafy-welcome-badge { display: none } }
 
-/* --- SEKCJA NAPRAWCZA --- */
+/* --- SEKCJA STABILNA (Tekst OK, Kropki w kwadracie) --- */
 
-/* 1. TYLKO TEKST (Blokujemy wszelkie flexy i fit-contenty) */
 .message-text {
-    display: block !important;       /* To naprawia rozsypany tekst - tekst musi być blokiem */
-    width: auto !important;          /* To naprawia ściskanie tekstu w pionowy pasek */
+    display: block !important;       /* Naprawia nakładanie się tekstu */
+    width: fit-content;              /* Szerokość dopasowana do treści */
     max-width: 280px;
     
     padding: 14px 18px;
@@ -79,23 +78,10 @@
     border-radius: 4px 20px 20px 20px;
 }
 
-/* Kolory dla usera */
 .chat-message.outgoing .message-text { background: #F97316; color: #fff; border-radius: 20px 20px 4px 20px }
 #mediafy-root-container .chat-message.outgoing .message-text { background: #2563EB }
 
-/* 2. TYLKO KROPKI (Wymuszamy flexa, ignorujemy ustawienia tekstu wyżej) */
-.message-text.loading-message {
-    display: flex !important;           /* Kropki MUSZĄ być flexem */
-    flex-direction: row !important;     /* MUSZĄ być w poziomie */
-    width: fit-content !important;      /* MUSZĄ być ciasne */
-    align-items: center !important;
-    justify-content: center !important;
-    min-width: 50px !important;
-    gap: 4px;
-    padding: 18px !important;           /* Trochę inne paddingi dla kropek */
-}
-
-/* 3. UKRYWANIE DYMKA POWITALNEGO GDY CZAT OTWARTY */
+/* --- UKRYWANIE DYMKA POWITALNEGO --- */
 body.show-widget .sparta-welcome-badge,
 body.show-widget .mediafy-welcome-badge,
 body.show-mediafy-widget .sparta-welcome-badge,
