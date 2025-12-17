@@ -43,7 +43,7 @@
 .input-container-dark{background:#1e1e1e;border-radius:24px;padding:8px 16px;border:1px solid #333}
 .chat-input-field{background:transparent;border:none;color:#fff;width:100%;outline:0;resize:none;min-height:20px;max-height:120px;padding:0;font-size:15px;font-family:inherit}
 .input-controls-row{display:flex;align-items:center;justify-content:space-between;margin-top:12px;gap:10px}
-.icon-btn-dark{background:transparent;border:none;color:#9da3ae;cursor:pointer;padding:8px;border-radius:8px;position:relative}
+.icon-btn-dark{background:transparent;border:none;color:#9da3ae;cursor:default;padding:8px;border-radius:8px;position:relative;pointer-events:none}
 .cart-badge{position:absolute;top:-4px;right:-4px;background:#F97316;color:#fff;font-size:10px;font-weight:700;padding:2px 6px;border-radius:50%;min-width:18px;height:18px;display:flex;align-items:center;justify-content:center}
 .pill-btn-outline{background:transparent;border:1px solid #333;color:#fff;padding:8px 16px;border-radius:50px;cursor:pointer;font-size:14px;display:flex;align-items:center;gap:6px}
 .send-btn{background:#F97316;border:none;color:#fff;padding:10px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;width:40px;height:40px}
