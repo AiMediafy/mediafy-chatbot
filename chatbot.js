@@ -528,25 +528,29 @@
             
             // Scrollowanie do najnowszej wiadomości
             // Znajdź ostatnią wiadomość użytkownika (Twoje pytanie)
+// Znajdź ostatnią wiadomość użytkownika
 const lastUserMessage = chatbox.querySelector(".chat-message.outgoing:last-of-type");
 
 if (lastUserMessage) {
-    // Odczekaj chwilę, aż DOM się przeliczy
     setTimeout(() => {
-        // Znajdź główny kontener z treścią
         const container = document.querySelector(".widget-content");
         
         if (container) {
-            // Oblicz pozycję: Góra Twojej wiadomości minus 10px (żeby nie było przyklejone do sufitu)
-            const targetPosition = lastUserMessage.offsetTop - 10;
-            
-            // Wykonaj przewinięcie w dół do wyliczonej pozycji
-            container.scrollTo({
-                top: targetPosition,
+            // Pobierz prostokątne współrzędne wiadomości i kontenera
+            const messageRect = lastUserMessage.getBoundingClientRect();
+            const containerRect = container.getBoundingClientRect();
+
+            // Oblicz różnicę: Gdzie jest wiadomość vs Gdzie jest góra kontenera
+            // Odejmujemy 20px, żeby był lekki odstęp od sufitu
+            const offset = messageRect.top - containerRect.top - 20;
+
+            // Przesuń scroll dokładnie o wyliczoną różnicę
+            container.scrollBy({
+                top: offset,
                 behavior: "smooth"
             });
         }
-    }, 200);
+    }, 100);
 }
         };
         
