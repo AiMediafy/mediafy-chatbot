@@ -45,16 +45,24 @@
 
 /* ZMIANA 2: Pełna naprawa tekstu (łamanie linii) */
 .message-text {
+    /* --- FIX KRYTYCZNY: BLOKOWANIE NAKŁADANIA SIĘ TEKSTU --- */
+    display: block !important; /* To naprawia błąd z obrazka (tekst obok siebie) */
+    
     padding: 14px 18px;
     font-size: 15px;
     line-height: 1.5;
     max-width: 280px;
-    
-    /* Usunięte fit-content naprawia błąd */
+
+    /* --- FIX SZEROKOŚCI --- */
+    /* Przywracamy fit-content, bo przy word-break: normal jest bezpieczny */
+    width: fit-content;
+    width: -moz-fit-content;
+
+    /* --- FIX ŁAMANIA TEKSTU --- */
     word-wrap: break-word;
     overflow-wrap: break-word; 
-    word-break: normal;
-    white-space: pre-wrap; /* To sprawia, że Twoje entery z promptu działają */
+    word-break: normal;        /* To zapobiega "pionowemu paskowi" */
+    white-space: pre-wrap;     /* Zachowuje entery i formatowanie */
 
     background: #2c2c2e;
     color: #fff;
