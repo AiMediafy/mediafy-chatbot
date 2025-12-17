@@ -49,16 +49,12 @@
     font-size: 15px;
     line-height: 1.5;
     max-width: 280px;
-
-    /* --- FIX: ZAPOBIEGANIE ŚCISKANIU TEKSTU --- */
-    width: fit-content;       /* To sprawia, że dymek zawsze dopasuje się do szerokości tekstu */
-    width: -moz-fit-content;  /* Wsparcie dla Firefoxa */
     
+    /* Usunięte fit-content naprawia błąd */
     word-wrap: break-word;
-    word-break: normal;       /* Zmienione z break-word na normal, żeby nie szatkował słów */
-    overflow-wrap: anywhere;  /* To zostaje, żeby łamać długie linki */
-    white-space: pre-wrap;
-    /* ------------------------------------------ */
+    overflow-wrap: break-word; 
+    word-break: normal;
+    white-space: pre-wrap; /* To sprawia, że Twoje entery z promptu działają */
 
     background: #2c2c2e;
     color: #fff;
