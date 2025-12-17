@@ -90,3 +90,16 @@ body.show-mediafy-widget .mediafy-welcome-badge {
     opacity: 0 !important;
     pointer-events: none !important;
 }
+/* --- FIX: Wygląd paska przewijania (Scrollbar) --- */
+.chatbot-widget *::-webkit-scrollbar {
+    width: 6px;               /* Cienki pasek */
+}
+
+.chatbot-widget *::-webkit-scrollbar-track {
+    background: #131314;      /* Tło paska: Czarne (zgodne z tłem czatu) */
+}
+
+.chatbot-widget *::-webkit-scrollbar-thumb {
+    background: #2563EB;      /* Suwak: Niebieski Mediafy */
+    border-radius: 10px;      /* Zaokrąglone rogi suwaka */
+}
