@@ -527,11 +527,15 @@
             }
             
             // Scrollowanie do najnowszej wiadomości
-            const scrollContainer = root.querySelector(".widget-content");
-            scrollContainer.scrollTo({ top: scrollContainer.scrollHeight, behavior: 'smooth' });
-            
-            const lastUserMessage = chatbox.querySelector(".chat-message.outgoing:last-of-type");
-            if (lastUserMessage) lastUserMessage.scrollIntoView({ behavior: "smooth", block: "start" });
+            // Znajdź ostatnią wiadomość użytkownika (Twoje pytanie)
+const lastUserMessage = chatbox.querySelector(".chat-message.outgoing:last-of-type");
+
+if (lastUserMessage) {
+    // Odczekaj chwilę, aż DOM się przeliczy, i ustaw widok na Twoje pytanie
+    setTimeout(() => {
+        lastUserMessage.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 100);
+}
         };
         
         // Obsługa wysyłania wiadomości
