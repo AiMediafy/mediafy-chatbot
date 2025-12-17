@@ -651,9 +651,17 @@
     });
     
     // Opóźnienie 3 sekundy przed pokazaniem dymka Mediafy
-    setTimeout(() => {
-        resetBadge('mediafy');
-    }, 3000);
+    // Pokaż ikony chatbotów po 3 sekundach
+setTimeout(() => {
+    document.querySelectorAll('.chatbot-toggler').forEach(btn => {
+        btn.style.display = 'flex';
+    });
+}, 3000);
+
+// Pokaż biały dymek Mediafy po 10 sekundach
+setTimeout(() => {
+    resetBadge('mediafy');
+}, 10000);
 }
 
 // Uruchomienie po załadowaniu DOM
