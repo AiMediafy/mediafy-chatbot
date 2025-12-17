@@ -45,24 +45,19 @@
 
 /* ZMIANA 2: Pełna naprawa tekstu (łamanie linii) */
 .message-text {
-    /* --- FIX KRYTYCZNY: BLOKOWANIE NAKŁADANIA SIĘ TEKSTU --- */
-    display: block !important; /* To naprawia błąd z obrazka (tekst obok siebie) */
+    /* --- FIX GŁÓWNY: ZWYKŁY TEKST --- */
+    display: block !important;  /* Tekst musi być blokiem, żeby się nie rozjeżdżał */
+    width: auto !important;     /* USUNĄŁEM fit-content. To auto naprawia rozsypany tekst! */
+    max-width: 280px;
     
     padding: 14px 18px;
     font-size: 15px;
     line-height: 1.5;
-    max-width: 280px;
 
-    /* --- FIX SZEROKOŚCI --- */
-    /* Przywracamy fit-content, bo przy word-break: normal jest bezpieczny */
-    width: fit-content;
-    width: -moz-fit-content;
-
-    /* --- FIX ŁAMANIA TEKSTU --- */
     word-wrap: break-word;
     overflow-wrap: break-word; 
-    word-break: normal;        /* To zapobiega "pionowemu paskowi" */
-    white-space: pre-wrap;     /* Zachowuje entery i formatowanie */
+    word-break: normal;
+    white-space: pre-wrap;
 
     background: #2c2c2e;
     color: #fff;
@@ -98,9 +93,10 @@ body.show-mediafy-widget .mediafy-welcome-badge {
 }
 /* --- FIX: Naprawa animacji ładowania (trzy kropki) --- */
 .message-text.loading-message {
-    display: flex !important;        /* Przywracamy flex, żeby kropki były w poziomie */
-    align-items: center !important;  /* Centrujemy je w pionie */
-    gap: 4px;                        /* Odstęp między kropkami */
-    min-width: 50px;                 /* Minimalna szerokość, żeby nie był za chudy */
-    justify-content: center;         /* Wyśrodkowanie kropek */
+    display: flex !important;       /* Kropki muszą mieć flex */
+    width: fit-content !important;  /* Kropki muszą być ciasne */
+    align-items: center !important;
+    gap: 4px;
+    min-width: 50px;
+    justify-content: center;
 }
