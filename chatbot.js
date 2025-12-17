@@ -655,6 +655,7 @@
 setTimeout(() => {
     document.querySelectorAll('.chatbot-toggler').forEach(btn => {
         btn.style.display = 'flex';
+        setTimeout(() => btn.classList.add('show'), 10);
     });
 }, 3000);
 
