@@ -96,3 +96,11 @@ body.show-mediafy-widget .mediafy-welcome-badge {
     opacity: 0 !important;
     pointer-events: none !important;
 }
+/* --- FIX: Naprawa animacji ładowania (trzy kropki) --- */
+.message-text.loading-message {
+    display: flex !important;        /* Przywracamy flex, żeby kropki były w poziomie */
+    align-items: center !important;  /* Centrujemy je w pionie */
+    gap: 4px;                        /* Odstęp między kropkami */
+    min-width: 50px;                 /* Minimalna szerokość, żeby nie był za chudy */
+    justify-content: center;         /* Wyśrodkowanie kropek */
+}
