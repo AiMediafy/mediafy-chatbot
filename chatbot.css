@@ -44,8 +44,26 @@
 #mediafy-root-container .bot-icon { background: #2563EB }
 
 /* ZMIANA 2: Pełna naprawa tekstu (łamanie linii) */
-.message-text { padding: 14px 18px; font-size: 15px; line-height: 1.5; max-width: 280px; word-wrap: break-word; word-break: break-word; overflow-wrap: anywhere; white-space: pre-wrap; background: #2c2c2e; color: #fff; border-radius: 4px 20px 20px 20px }
+.message-text {
+    padding: 14px 18px;
+    font-size: 15px;
+    line-height: 1.5;
+    max-width: 280px;
 
+    /* --- FIX: ZAPOBIEGANIE ŚCISKANIU TEKSTU --- */
+    width: fit-content;       /* To sprawia, że dymek zawsze dopasuje się do szerokości tekstu */
+    width: -moz-fit-content;  /* Wsparcie dla Firefoxa */
+    
+    word-wrap: break-word;
+    word-break: normal;       /* Zmienione z break-word na normal, żeby nie szatkował słów */
+    overflow-wrap: anywhere;  /* To zostaje, żeby łamać długie linki */
+    white-space: pre-wrap;
+    /* ------------------------------------------ */
+
+    background: #2c2c2e;
+    color: #fff;
+    border-radius: 4px 20px 20px 20px;
+}
 .chat-message.outgoing .message-text { background: #F97316; color: #fff; border-radius: 20px 20px 4px 20px }
 #mediafy-root-container .chat-message.outgoing .message-text { background: #2563EB }
 .bottom-input-area { padding: 0 24px 8px; background: #131314 }
