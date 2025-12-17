@@ -4,10 +4,12 @@
 .mediafy-welcome-badge{bottom:160px}
 .chatbot-toggler{position:fixed;bottom:30px;right:35px;background:#F97316;border:none;display:flex;align-items:center;justify-content:center;height:60px;width:60px;border-radius:50%;box-shadow:0 4px 12px rgba(0,0,0,.3);cursor:pointer;z-index:999999;color:#fff}
 #mediafy-root-container .chatbot-toggler{bottom:110px;background:#2563EB}
+.chatbot-toggler span{transition:all 0.3s ease-out}
 .chatbot-toggler span:last-child{display:none}
 .show-widget #sparta-root-container .chatbot-toggler span:first-child{display:none}
 .show-widget #sparta-root-container .chatbot-toggler span:last-child{display:block;animation:rotate-in 0.3s ease-out}
 .show-mediafy-widget #mediafy-root-container .chatbot-toggler span:first-child{display:none}
+#sparta-root-container .chatbot-toggler span:first-child,#mediafy-root-container .chatbot-toggler span:first-child{animation:rotate-in 0.3s ease-out}
 .show-mediafy-widget #mediafy-root-container .chatbot-toggler span:last-child{display:block;animation:rotate-in 0.3s ease-out}
 @keyframes rotate-in{from{transform:rotate(-90deg);opacity:0}to{transform:rotate(0);opacity:1}}
 .chatbot-widget{position:fixed;right:35px;bottom:180px;width:380px;height:600px;max-height:calc(100vh - 200px);background:#131314;border-radius:24px;box-shadow:0 12px 24px rgba(0,0,0,.5);opacity:0;pointer-events:none;transform:scale(.9);transform-origin:bottom right;transition:.2s;display:flex;flex-direction:column;overflow:hidden;z-index:999998;border:1px solid #333}
