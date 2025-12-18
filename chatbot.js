@@ -684,24 +684,29 @@ setTimeout(() => {
     resetBadge('mediafy');
 }, 10000);
 }
-// --- OBSŁUGA PRZYCISKÓW Z FRAMERA ---
+             
+// --- OBSŁUGA PRZYCISKÓW Z FRAMERA (Wersja z Priorytetem) ---
     document.addEventListener('click', (e) => {
-        // Sprawdź, czy kliknięto element, który ma link do #open-sparta
-        const spartaLink = e.target.closest('a[href*="#open-sparta"]');
-        
-        if (spartaLink) {
-            e.preventDefault(); // Zablokuj zwykłe przewijanie
+        // 1. Sprawdź, czy kliknięto w link (lub element wewnątrz linku)
+        const link = e.target.closest('a');
 
+        // 2. Jeśli to link i ma w adresie nasz znacznik #open-sparta
+        if (link && link.href.includes('#open-sparta')) {
+            // 3. NAJWAŻNIEJSZE: Zablokuj Framera
+            e.preventDefault();  // Nie przeładowuj strony/nie zmieniaj URL
+            e.stopPropagation(); // Nie mów Framerowi, że kliknięto (zatrzymaj bąbelkowanie)
             
-            // Logika otwierania SPARTY
-            document.body.classList.remove('show-mediafy-widget'); // Zamknij niebieskiego
+            // 4. Logika otwierania SPARTY
+            document.body.classList.remove('show-mediafy-widget'); // Zamknij niebieskiego (jak jest otwarty)
             document.body.classList.add('show-widget');            // Otwórz pomarańczowego
             
             // Ukryj dymki powitalne
             const badges = document.querySelectorAll('.sparta-welcome-badge, .mediafy-welcome-badge');
             badges.forEach(b => b.style.display = 'none');
         }
-    });
+    }, true); // <--- TO JEST KLUCZ: 'true' oznacza, że łapiemy kliknięcie PIERWSI, przed Framerem!
+             
+             
 // Uruchomienie po załadowaniu DOM
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
