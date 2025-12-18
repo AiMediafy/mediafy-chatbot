@@ -684,7 +684,24 @@ setTimeout(() => {
     resetBadge('mediafy');
 }, 10000);
 }
+// --- OBSŁUGA PRZYCISKÓW Z FRAMERA ---
+    document.addEventListener('click', (e) => {
+        // Sprawdź, czy kliknięto element, który ma link do #open-sparta
+        const spartaLink = e.target.closest('a[href*="#open-sparta"]');
+        
+        if (spartaLink) {
+            e.preventDefault(); // Zablokuj zwykłe przewijanie
 
+            
+            // Logika otwierania SPARTY
+            document.body.classList.remove('show-mediafy-widget'); // Zamknij niebieskiego
+            document.body.classList.add('show-widget');            // Otwórz pomarańczowego
+            
+            // Ukryj dymki powitalne
+            const badges = document.querySelectorAll('.sparta-welcome-badge, .mediafy-welcome-badge');
+            badges.forEach(b => b.style.display = 'none');
+        }
+    });
 // Uruchomienie po załadowaniu DOM
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
