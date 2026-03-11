@@ -1,20 +1,20 @@
 #li-tab {
   position: fixed;
   bottom: 90px;
-  right: 0;
+  left: 0;
   width: 200px;
   background: #0a0a12;
   border: 1px solid rgba(37,99,235,0.3);
-  border-right: none;
-  border-radius: 100px 0 0 100px;
-  box-shadow: -4px 4px 20px rgba(37,99,235,0.2);
+  border-left: none;
+  border-radius: 0 100px 100px 0;
+  box-shadow: 4px 4px 20px rgba(37,99,235,0.2);
   display: flex;
   align-items: center;
   gap: 10px;
   padding: 8px 16px 8px 8px;
   cursor: pointer;
   z-index: 1001;
-  transform: translateX(160px);
+  transform: translateX(-160px);
   transition: transform 0.4s cubic-bezier(.22,.68,0,1.2);
 }
 #li-tab:hover { transform: translateX(0); }
@@ -36,7 +36,7 @@
 #li-card {
   position: fixed;
   bottom: 90px;
-  right: 32px;
+  left: 32px;
   width: 300px;
   background: #0a0a12;
   border: 1px solid rgba(37,99,235,0.25);
@@ -69,20 +69,20 @@
 #mac-tab {
   position: fixed;
   bottom: 32px;
-  right: 0;
+  left: 0;
   width: 200px;
   background: #0a0a12;
   border: 1px solid rgba(37,99,235,0.3);
-  border-right: none;
-  border-radius: 100px 0 0 100px;
-  box-shadow: -4px 4px 20px rgba(37,99,235,0.2);
+  border-left: none;
+  border-radius: 0 100px 100px 0;
+  box-shadow: 4px 4px 20px rgba(37,99,235,0.2);
   display: flex;
   align-items: center;
   gap: 10px;
   padding: 8px 16px 8px 8px;
   cursor: pointer;
   z-index: 1001;
-  transform: translateX(160px);
+  transform: translateX(-160px);
   transition: transform 0.4s cubic-bezier(.22,.68,0,1.2);
 }
 #mac-tab:hover { transform: translateX(0); }
@@ -104,7 +104,7 @@
 #mac-card {
   position: fixed;
   bottom: 90px;
-  right: 32px;
+  left: 32px;
   width: 300px;
   background: #0a0a12;
   border: 1px solid rgba(37,99,235,0.25);
@@ -174,9 +174,9 @@
 .li-btn:hover { opacity: 0.9; box-shadow: 0 4px 20px rgba(37,99,235,0.5); }
 
 @media (max-width: 768px) {
-  #li-tab { width: 52px; padding: 8px; justify-content: center; border-radius: 50% 0 0 50%; }
+  #li-tab { width: 52px; padding: 8px; justify-content: center; border-radius: 0 50% 50% 0; transform: translateX(-16px); }
   #li-tab span { display: none; }
-  #mac-tab { width: 52px; padding: 8px; justify-content: center; border-radius: 50% 0 0 50%; }
+  #mac-tab { width: 52px; padding: 8px; justify-content: center; border-radius: 0 50% 50% 0; transform: translateX(-16px); }
   #mac-tab span { display: none; }
-  #li-card, #mac-card { right: 12px; width: 260px; }
+  #li-card, #mac-card { left: 8px; width: 260px; }
 }
