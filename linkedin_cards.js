@@ -78,12 +78,6 @@
     liTab.addEventListener('click', showJerzy);
     macClose.addEventListener('click', hideMaciej);
     macTab.addEventListener('click', showMaciej);
-
-    // Pokaż kartę Jerzego po 3s, schowaj po 6s
-    setTimeout(() => {
-      showJerzy();
-      setTimeout(() => hideJerzy(), 6000);
-    }, 3000);
   }
 
   if (document.readyState === 'loading') {
