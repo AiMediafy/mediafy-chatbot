@@ -126,7 +126,6 @@
             CHAT_SESSION_ID: 'mediafy_' + Math.random().toString(36).substring(2, 9),
         };
 
-        // Globalna pomocnicza funkcja dla chipów
         window.mediafyFillInput = function(text) {
             const root = document.getElementById('mediafy-root-container');
             const input = root.querySelector('.chat-input-field');
@@ -151,18 +150,15 @@
             const settingsPanel = root.querySelector('.settings-panel');
             const closePanel = root.querySelector('.close-panel-icon');
 
-            // Toggle open/close
             toggler.onclick = () => {
                 document.body.classList.toggle('show-mediafy-widget');
                 const badge = root.querySelector('.mediafy-welcome-badge');
                 if (badge) badge.style.display = 'none';
             };
 
-            // Settings panel
             if (menuBtn) menuBtn.onclick = () => settingsPanel.classList.toggle('active');
             if (closePanel) closePanel.onclick = () => settingsPanel.classList.remove('active');
 
-            // Create message element
             const createMsg = (message, className) => {
                 const li = document.createElement('li');
                 li.classList.add('chat-message', className);
@@ -183,7 +179,6 @@
                 return li;
             };
 
-            // Format raw reply into HTML
             const formatReply = (reply) => {
                 return reply
                     .replace(/\n[-\s]*\s/g, '\n')
@@ -194,7 +189,6 @@
                     .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
             };
 
-            // Typewriter effect — litera po literze
             const typewriter = (el, text) => {
                 const scrollContainer = root.querySelector('.widget-content');
                 el.innerHTML = '';
@@ -215,7 +209,6 @@
                 tick();
             };
 
-            // Fetch response from n8n
             const generateResponse = async (chatElement, userMessage) => {
                 const msgEl = chatElement.querySelector('.message-text');
                 try {
@@ -232,7 +225,6 @@
                 }
             };
 
-            // Handle send
             const handleChat = () => {
                 const message = input.value.trim();
                 if (!message) return;
@@ -263,53 +255,88 @@
                 }
             };
 
-            // Auto-resize textarea
             input.oninput = () => {
                 input.style.height = 'auto';
                 input.style.height = Math.min(input.scrollHeight, 100) + 'px';
             };
 
-            // Voice recognition
+            // ── Voice recognition z live transcription ──
             if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
                 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
                 const recognition = new SpeechRecognition();
                 recognition.lang = 'pl-PL';
-                recognition.interimResults = false;
+                recognition.interimResults = true;  // tekst pojawia się na żywo
+                recognition.continuous = false;
+
+                let isListening = false;
 
                 voiceBtn.onclick = () => {
-                    if (voiceBtn.classList.contains('listening')) {
+                    if (isListening) {
                         recognition.stop();
                         return;
                     }
+                    input.value = '';
                     recognition.start();
+                    isListening = true;
                     voiceBtn.classList.add('listening');
                     voiceBtn.innerHTML = '<span class="material-symbols-rounded" style="font-size:14px">mic</span> Słucham...';
                 };
 
                 recognition.onresult = (event) => {
-                    input.value = event.results[0][0].transcript;
-                    voiceBtn.classList.remove('listening');
-                    voiceBtn.innerHTML = '<span class="material-symbols-rounded" style="font-size:14px">graphic_eq</span> Mów';
-                    handleChat();
+                    let interimText = '';
+                    let finalText = '';
+
+                    for (let i = event.resultIndex; i < event.results.length; i++) {
+                        const transcript = event.results[i][0].transcript;
+                        if (event.results[i].isFinal) {
+                            finalText += transcript;
+                        } else {
+                            interimText += transcript;
+                        }
+                    }
+
+                    // Interim — pokazuj na żywo podczas mówienia
+                    if (interimText) {
+                        input.value = interimText;
+                        input.style.height = 'auto';
+                        input.style.height = Math.min(input.scrollHeight, 100) + 'px';
+                    }
+
+                    // Final — wyślij automatycznie
+                    if (finalText) {
+                        input.value = finalText;
+                        input.style.height = 'auto';
+                        input.style.height = Math.min(input.scrollHeight, 100) + 'px';
+                        isListening = false;
+                        voiceBtn.classList.remove('listening');
+                        voiceBtn.innerHTML = '<span class="material-symbols-rounded" style="font-size:14px">graphic_eq</span> Mów';
+                        handleChat();
+                    }
                 };
 
                 recognition.onend = () => {
+                    isListening = false;
                     voiceBtn.classList.remove('listening');
                     voiceBtn.innerHTML = '<span class="material-symbols-rounded" style="font-size:14px">graphic_eq</span> Mów';
                 };
+
+                recognition.onerror = () => {
+                    isListening = false;
+                    voiceBtn.classList.remove('listening');
+                    voiceBtn.innerHTML = '<span class="material-symbols-rounded" style="font-size:14px">graphic_eq</span> Mów';
+                };
+
             } else {
                 if (voiceBtn) voiceBtn.style.display = 'none';
             }
         }
 
-        // Close on click outside
         document.addEventListener('click', (e) => {
             const root = document.getElementById('mediafy-root-container');
             if (!root) return;
             if (document.body.classList.contains('show-mediafy-widget')) {
                 if (!root.contains(e.target)) {
                     document.body.classList.remove('show-mediafy-widget');
-                    // Show badge again after closing
                     const badge = root.querySelector('.mediafy-welcome-badge');
                     if (badge) {
                         badge.innerHTML = '<span class="badge-dot"></span> Masz pytanie? Porozmawiajmy 👋';
@@ -319,7 +346,6 @@
             }
         });
 
-        // Show toggler + badge after delay
         setTimeout(() => {
             const toggler = document.querySelector('#mediafy-root-container .chatbot-toggler');
             if (toggler) {
@@ -328,7 +354,6 @@
             }
         }, 1500);
 
-        // Show welcome badge after 8s
         setTimeout(() => {
             if (!document.body.classList.contains('show-mediafy-widget')) {
                 const badge = document.querySelector('#mediafy-root-container .mediafy-welcome-badge');
@@ -336,7 +361,6 @@
             }
         }, 8000);
 
-        // Handle #open-mediafy links from Framer
         document.addEventListener('click', (e) => {
             const link = e.target.closest('a');
             if (link && link.href.includes('#open-mediafy')) {
