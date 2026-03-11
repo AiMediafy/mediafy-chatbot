@@ -183,6 +183,38 @@
                 return li;
             };
 
+            // Format raw reply into HTML
+            const formatReply = (reply) => {
+                return reply
+                    .replace(/\n[-\s]*\s/g, '\n')
+                    .replace(/\n\n+/g, '\n\n')
+                    .replace(/\[([^\]]*?)\]\s*\(([^)]+)\)/g, `<a href="$2" target="_blank" style="color:#3b82f6;text-decoration:underline;font-weight:600">Kliknij tutaj</a>`)
+                    .replace(/(?<!href="|">)(https?:\/\/[^\s<]+)/g, `<a href="$1" target="_blank" style="color:#3b82f6;text-decoration:underline;font-weight:600">Kliknij tutaj</a>`)
+                    .replace(/\n/g, '<br>')
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            };
+
+            // Typewriter effect — litera po literze
+            const typewriter = (el, text) => {
+                const scrollContainer = root.querySelector('.widget-content');
+                el.innerHTML = '';
+                el.classList.add('streaming-cursor');
+                const delay = Math.max(4, Math.min(22, Math.floor(2200 / text.length)));
+                let i = 0;
+                const tick = () => {
+                    if (i < text.length) {
+                        el.textContent += text[i++];
+                        scrollContainer.scrollTo({ top: scrollContainer.scrollHeight, behavior: 'smooth' });
+                        setTimeout(tick, delay);
+                    } else {
+                        el.classList.remove('streaming-cursor');
+                        el.innerHTML = formatReply(text);
+                        scrollContainer.scrollTo({ top: scrollContainer.scrollHeight, behavior: 'smooth' });
+                    }
+                };
+                tick();
+            };
+
             // Fetch response from n8n
             const generateResponse = async (chatElement, userMessage) => {
                 const msgEl = chatElement.querySelector('.message-text');
@@ -194,23 +226,10 @@
                     });
                     const data = await res.json();
                     const reply = data.message || data.output || data.text || JSON.stringify(data);
-
-                    let formatted = reply
-                        .replace(/\n[-\s]*\s/g, '\n')
-                        .replace(/\n\n+/g, '\n\n')
-                        .replace(/\[([^\]]*?)\]\s*\(([^)]+)\)/g, `<a href="$2" target="_blank" style="color:#3b82f6;text-decoration:underline;font-weight:600">Kliknij tutaj</a>`)
-                        .replace(/(?<!href="|">)(https?:\/\/[^\s<]+)/g, `<a href="$1" target="_blank" style="color:#3b82f6;text-decoration:underline;font-weight:600">Kliknij tutaj</a>`)
-                        .replace(/\n/g, '<br>')
-                        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-
-                    msgEl.innerHTML = formatted;
+                    typewriter(msgEl, reply);
                 } catch (e) {
                     msgEl.textContent = 'Błąd połączenia. Spróbuj ponownie.';
                 }
-
-                // Scroll to latest
-                const scrollContainer = root.querySelector('.widget-content');
-                scrollContainer.scrollTo({ top: scrollContainer.scrollHeight, behavior: 'smooth' });
             };
 
             // Handle send
