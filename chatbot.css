@@ -602,3 +602,14 @@ body.show-mediafy-widget .mediafy-welcome-badge {
   opacity: 0 !important;
   pointer-events: none !important;
 }
+
+/* ── TYPEWRITER CURSOR ────────────────────────── */
+.streaming-cursor::after {
+  content: '▋';
+  color: #3b82f6;
+  animation: bcur .7s step-end infinite;
+}
+@keyframes bcur {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
